@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head></head>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.png"> 
+<iframe style="border-radius: 24px" src="https://untitled.stream/embed/qz41qVDN3usQ" width="100%" height="344" allowFullScreen="" allow="picture-in-picture" frameborder="0" loading="lazy"></iframe>
     <head>
- <link rel="shortcut icon" type="image/x-icon" href="favicon.png"> 
-        <iframe style="border-radius: 24px" src="https://untitled.stream/embed/qz41qVDN3usQ" width="100%" height="344" allowFullScreen="" allow="picture-in-picture" frameborder="0" loading="lazy"></iframe>
 </head>
     <p hidden><audio controls pause>
      <source src="" type="audio/mpeg" />
-
      <source src="" type="audio/mpeg" />
-
      Your browser does not support the audio element.
-
      </audio></p>
 
         <meta charset="UTF-8" />
@@ -45,7 +42,7 @@
                     tb8_tekst +
                     tb8_messages[tb8_currMsg].substring(tb8_i, tb8_i + 1);
                 document.title = tb8_tekst;
-                tb8_sp = tb8_speed;
+                tb8_sp = tb8_speed; // tb8_sp was not declared with var/let/const, making it global
                 tb8_i++;
                 if (tb8_i == tb8_messages[tb8_currMsg].length) {
                     tb8_currMsg++;
@@ -85,46 +82,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/xp.css/dist/98.css">
     <script language="JavaScript">
-function Scroll()
-{
-document.title = msg.substring(pos, msg.length) + space + msg.substring(0,pos);
-pos++;
-if (pos > msg.length) pos = 0;
-window.setTimeout("Scroll()", speed);
-}
-Scroll();
+// This Scroll() function is likely broken as msg, pos, space, speed are not defined here.
+// It might conflict with the tb8_pisi() function also trying to set document.title.
+// function Scroll()
+// {
+// document.title = msg.substring(pos, msg.length) + space + msg.substring(0,pos);
+// pos++;
+// if (pos > msg.length) pos = 0;
+// window.setTimeout("Scroll()", speed);
+// }
+// Scroll();
 </script>
     <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2013/07/13/09/38/sphere-155819_640.png">
     <style>
-      
+
       .menu {
         padding: 2px;
-        
       }
-      	
-    a {
+
+    /* Applied a class to the link for better targeting */
+    a.spotify-link {
       color:white;
-      font-weight: thin;
+      font-weight: normal; /* 'thin' is not a standard value, use numeric or keywords */
       text-decoration: none;
-      
+      display: inline-block; /* Helps with centering contents */
+      text-align: center; /* Centers the text blocks inside */
+      margin-top: 20px; /* Added some margin to space it from the iframe */
     }
-      
-      
-      
+
     body {
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0;
-        background-color: #e9e8c1;
-        flex-direction: column; /* Added to stack elements vertically */
+        background-color: #e9e8c1; /* This might be overridden by the inline style on the misplaced body tag */
+        flex-direction: column;
+        min-height: 100vh; /* Ensure body takes full height */
     }
 
     .cd-container {
         width: 400px;
         height: 400px;
         animation: spin 5s linear infinite;
-        margin-top: 20px; /* Added margin to separate paragraph and CD */
+        margin-top: 20px;
     }
 
     .cd {
@@ -137,72 +137,39 @@ Scroll();
         from {
             transform: rotate(0deg);
         }
-
         to {
             transform: rotate(360deg);
         }
     }
-</style> <head>
-  <body style="                          background-color: black;"> <br>
-     
-  </body>
+
+    /* Styles for the static "demos" text */
+    .static-demos-text {
+        color: white;
+        font-size: 28px; /* Increased size a bit, adjust as needed */
+        filter: drop-shadow(0px 0px 8px white); /* White glow/drop shadow */
+        /* text-align: center; /* Centering is handled by parent <a> with text-align:center */
+    }
+
+</style> <head> <!-- This is a misplaced <head> tag -->
+  <body style="background-color: black;"> <br> <!-- This is a misplaced <body> tag INSIDE the misplaced <head> tag. The background-color: black will likely take precedence. -->
+
+  </body> <!-- Closing misplaced body -->
 <style>
 </style>
 <script>
-var audio = document.getElementById("myAudio");
+// This script attempts to get 'myAudio' but the audio tag doesn't have an id="myAudio"
+// var audio = document.getElementById("myAudio");
 
-function toggleAudio() {
-if (audio.paused) {
-audio.play();
-} else {
-audio.pause();
-}
-}
+// function toggleAudio() {
+// if (audio.paused) {
+// audio.play();
+// } else {
+// audio.pause();
+// }
+// }
     </script>
 <!-- Clickable text transition to another site -->
-<a href="https://open.spotify.com/artist/44rOMpAdqgii2o6qddv4MX">
-    <div id="text-container">
-        <span id="typed-text" style="font-size: 20px; filter: drop-shadow(0px 0px 5px white);"></span>
-        <span class="cursor"></span>
-    </div>
+<a href="https://open.spotify.com/artist/44rOMpAdqgii2o6qddv4MX" class="spotify-link"> <!-- Added class for styling -->
+    <div class="static-demos-text">demos</div> <!-- ONLY "demos" text now -->
 </a>
-<img src="" alt="" style="height: 0px;">
-
-<script>
-    
-    const textContainer = document.getElementById('typed-text');
-    const cursor = document.querySelector('.cursor');
-    const words = ["Mixtape I'm working on."];
-
-    let currentWordIndex = 0;
-    let currentCharIndex = 0;
-
-    function typeText() {
-        const currentWord = words[currentWordIndex];
-        const currentText = currentWord.substring(0, currentCharIndex + 1);
-        textContainer.textContent = currentText;
-
-        if (currentCharIndex < currentWord.length) {
-            currentCharIndex++;
-            setTimeout(typeText, 100); // Adjust the speed here (in milliseconds)
-        } else {
-            setTimeout(eraseText, 1500); // Time before starting the erasing
-        }
-    }
-
-    function eraseText() {
-        if (currentCharIndex >= 0) {
-            const currentText = words[currentWordIndex].substring(0, currentCharIndex);
-            textContainer.textContent = currentText;
-            currentCharIndex--;
-            setTimeout(eraseText, 50); // Adjust the speed here (in milliseconds)
-        } else {
-            currentWordIndex = (currentWordIndex + 1) % words.length;
-            setTimeout(typeText, 500); // Time before starting the typing again
-        }
-    }
-
-    // Start the initial typing
-    setTimeout(typeText, 1000); // Time before starting the typing
-</script>
 <html>
